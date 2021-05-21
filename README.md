@@ -23,7 +23,7 @@ The Policy deployment will require that you have the appropriate user permission
 
 The runbook deployment requires that you have an automation account in one of your Azure subscriptions with a configured Run As Account.  The Run As Account must be contributor over the Tenant Root Group to make changes to tags.  This can be added with Terraform using the following:
 
-data-sources.tf
+data-sources terraform file
 ```
 data "azuread_service_principal" "automation_run_as_account" {
   display_name = var.automation_run_as_account
@@ -34,7 +34,7 @@ data "azurerm_management_group" "tenant_root" {
 }
 ```
 
-role-assignments.tf
+role-assignments terraform file
 ```
 resource "azurerm_role_assignment" "automation_run_as_account" {
   scope                = data.azurerm_management_group.kpmg_root.id
@@ -45,7 +45,7 @@ resource "azurerm_role_assignment" "automation_run_as_account" {
 
 You will also need to be sure that you have the required automation modules to run the script in the automation account.  This includes Az.Accounts, Az.Resources, and Az.PolicyInsights.
 
-automation-modules.tf
+automation-modules terraform file
 ```
 resource "azurerm_automation_module" "az_accounts" {
   name                    = "Az.Accounts"
