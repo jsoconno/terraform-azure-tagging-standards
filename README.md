@@ -21,4 +21,20 @@ It will also help you to create a runbook that uses an Azure Automation Run As A
 
 The Policy deployment will require that you have the appropriate user permissions to manage policies and assignments at the tenant root of your Azure tenant or that you have an app registration with these permissions with a generated client secret.
 
-The runbook deployment requires that you have an automation account in one of your Azure subscriptions with a configured Run As Account.
+The runbook deployment requires that you have an automation account in one of your Azure subscriptions with a configured Run As Account.  The Run As Account must be contributor over the Tenant Root Group to make changes to tags.  This can be added with Terraform using the following:
+
+```
+data "azuread_service_principal" "automation_run_as_account" {
+  display_name = var.automation_run_as_account
+}
+
+data "azurerm_management_group" "tenant_root" {
+  name = "Tenant Root Group"
+}
+
+resource "azurerm_role_assignment" "automation_run_as_account" {
+  scope                = data.azurerm_management_group.kpmg_root.id
+  role_definition_name = "Contributor"
+  principal_id         = data.azuread_service_principal.automation_run_as_account.object_id
+}
+```
