@@ -60,7 +60,7 @@ catch
 try
 {
     foreach ( $policy in $policies ) {
-        $job = Start-AzPolicyRemediation -PolicyAssignmentId $($assignment.PolicyAssignmentId) -PolicyDefinitionReferenceId $($policy.policyDefinitionReferenceId) -Name "remediate-$($policy.parameters.tagName.value)-tag" -ManagementGroupName $policyAssignmentScope.DisplayName -AsJob
+        $job = Start-AzPolicyRemediation -PolicyAssignmentId $($assignment.PolicyAssignmentId) -PolicyDefinitionReferenceId $($policy.policyDefinitionReferenceId) -Name "remediate-$($policy.parameters.tagName.value)-tag" -ManagementGroupName $policyAssignmentScope.Name -AsJob
         $job | Wait-Job
         $remediation = $job | Receive-Job
         Write-Output "$($remediation.Name):"
