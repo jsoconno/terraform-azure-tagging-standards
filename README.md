@@ -23,6 +23,7 @@ The Policy deployment will require that you have the appropriate user permission
 
 The runbook deployment requires that you have an automation account in one of your Azure subscriptions with a configured Run As Account.  The Run As Account must be contributor over the Tenant Root Group to make changes to tags.  This can be added with Terraform using the following:
 
+data-sources.tf
 ```
 data "azuread_service_principal" "automation_run_as_account" {
   display_name = var.automation_run_as_account
@@ -31,10 +32,48 @@ data "azuread_service_principal" "automation_run_as_account" {
 data "azurerm_management_group" "tenant_root" {
   name = "Tenant Root Group"
 }
+```
 
+role-assignments.tf
+```
 resource "azurerm_role_assignment" "automation_run_as_account" {
   scope                = data.azurerm_management_group.kpmg_root.id
   role_definition_name = "Contributor"
   principal_id         = data.azuread_service_principal.automation_run_as_account.object_id
+}
+```
+
+You will also need to be sure that you have the required automation modules to run the script in the automation account.  This includes Az.Accounts, Az.Resources, and Az.PolicyInsights.
+
+automation-modules.tf
+```
+resource "azurerm_automation_module" "az_accounts" {
+  name                    = "Az.Accounts"
+  resource_group_name     = data.azurerm_resource_group.main.name
+  automation_account_name = data.azurerm_automation_account.main.name
+
+  module_link {
+    uri = "https://www.powershellgallery.com/api/v2/package/Az.Accounts/2.2.8.0"
+  }
+}
+
+resource "azurerm_automation_module" "az_resources" {
+  name                    = "Az.Resources"
+  resource_group_name     = data.azurerm_resource_group.main.name
+  automation_account_name = data.azurerm_automation_account.main.name
+
+  module_link {
+    uri = "https://www.powershellgallery.com/api/v2/package/Az.Resources/2.5.1.0"
+  }
+}
+
+resource "azurerm_automation_module" "az_policy_insights" {
+  name                    = "Az.PolicyInsights"
+  resource_group_name     = data.azurerm_resource_group.main.name
+  automation_account_name = data.azurerm_automation_account.main.name
+
+  module_link {
+    uri = "https://www.powershellgallery.com/api/v2/package/Az.PolicyInsights/1.3.1.0"
+  }
 }
 ```
