@@ -15,10 +15,10 @@ Here are some common use cases for tagging:
 
 In order to create a consistent metadata model using tag key value pairs, you need a way of ensuring your tagging is consistent.  This repo provides Terraform code that will help you create policy definitions, policy initiatives (also known as policy sets), and policy assignments with an identity to allow for tagging remediation.
 
-## Steps
+It will also help you to create a runbook that uses an Azure Automation Run As Account to automate the remediation of resources that are not tagged for any reason under a resource group.  There are strange situations where this technically can happen, even with the policy.  For example, when an application uses a stored procedure to create a database.
 
-1. Clone this repository
-2. Gather details required for your backend configuration and authentication with Azure
-3. Modify code to add new tags you want to enforce, validate, and inherit
-4. Run Terraform plan to see what resources will be created
-5. Run Terraform apply to deploy them
+## Pre-Requisites
+
+The Policy deployment will require that you have the appropriate user permissions to manage policies and assignments at the tenant root of your Azure tenant or that you have an app registration with these permissions with a generated client secret.
+
+The runbook deployment requires that you have an automation account in one of your Azure subscriptions with a configured Run As Account.
