@@ -65,6 +65,10 @@ resource "azurerm_automation_module" "az_resources" {
   module_link {
     uri = "https://www.powershellgallery.com/api/v2/package/Az.Resources/2.5.1.0"
   }
+
+  depends_on = [
+    azurerm_automation_module.az_accounts
+  ]
 }
 
 resource "azurerm_automation_module" "az_policy_insights" {
@@ -75,5 +79,11 @@ resource "azurerm_automation_module" "az_policy_insights" {
   module_link {
     uri = "https://www.powershellgallery.com/api/v2/package/Az.PolicyInsights/1.3.1.0"
   }
+
+  depends_on = [
+    azurerm_automation_module.az_resources
+  ]
 }
 ```
+
+Note that if the depends on blocks are not included, Terraform will successfully import the first module, but fail on the rest.
