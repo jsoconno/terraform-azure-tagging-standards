@@ -19,7 +19,7 @@ It will also help you to create a runbook that uses an Azure Automation Run As A
 
 ## Pre-Requisites
 
-The Policy deployment will require that you have the appropriate user permissions to manage policies and assignments at the tenant root of your Azure tenant or that you have an app registration with these permissions with a generated client secret.
+The Policy deployment will require that you have the appropriate user permissions to manage policies and assignments at the tenant root of your Azure tenant or that you have an app registration with these permissions with a generated client secret.  You will also need to have created the initial Tenant Root Group management group.  Note that policy scopes can be easily modified by updating the data-sources.tf file.
 
 The runbook deployment requires that you have an automation account in one of your Azure subscriptions with a configured Run As Account.
 
