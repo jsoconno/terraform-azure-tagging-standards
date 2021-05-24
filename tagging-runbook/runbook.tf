@@ -1,6 +1,6 @@
 resource "azurerm_automation_runbook" "tagging_remediation" {
   name                    = "TaggingRemediation"
-  location                = "eastus2"
+  location                = data.azurerm_resource_group.main.location
   resource_group_name     = data.azurerm_resource_group.main.name
   automation_account_name = data.azurerm_automation_account.main.name
   log_verbose             = "true"
