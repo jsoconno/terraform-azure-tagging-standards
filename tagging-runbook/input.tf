@@ -21,3 +21,7 @@ variable "automation_account_resource_group_name" {
 variable "automation_account_name" {
     type = string
 }
+
+variable "automation_run_as_account" {
+    type = string
+}

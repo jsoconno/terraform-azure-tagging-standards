@@ -8,3 +8,4 @@ tenant_id       = ""
 
 automation_account_resource_group_name = ""
 automation_account_name                = ""
+automation_run_as_account_name         = ""
