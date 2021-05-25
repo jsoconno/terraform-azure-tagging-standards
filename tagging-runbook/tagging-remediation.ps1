@@ -17,6 +17,8 @@ try
         -TenantId $servicePrincipalConnection.TenantId `
         -ApplicationId $servicePrincipalConnection.ApplicationId `
         -CertificateThumbprint $servicePrincipalConnection.CertificateThumbprint
+        # Add the below if you are using Azure Government to ensure authentication works as expected
+        # -Environment "AzureUSGovernment"
 }
 catch
 {

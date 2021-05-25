@@ -16,5 +16,5 @@ data "azuread_service_principal" "automation_run_as_account" {
 }
 
 data "azurerm_management_group" "tenant_root" {
-  name = "Tenant Root Group"
+  name = var.tenant_id
 }
