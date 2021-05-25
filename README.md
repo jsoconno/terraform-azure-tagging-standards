@@ -23,47 +23,4 @@ The Policy deployment will require that you have the appropriate user permission
 
 The runbook deployment requires that you have an automation account in one of your Azure subscriptions with a configured Run As Account.
 
-You will also need to be sure that you have the required automation modules to run the script in the automation account.  This includes Az.Accounts, Az.Resources, and Az.PolicyInsights.  If you don't have these in your automation account, they can be created with Terraform using the following script:
-
-automation-modules terraform file
-```
-resource "azurerm_automation_module" "az_accounts" {
-  name                    = "Az.Accounts"
-  resource_group_name     = data.azurerm_resource_group.main.name
-  automation_account_name = data.azurerm_automation_account.main.name
-
-  module_link {
-    uri = "https://www.powershellgallery.com/api/v2/package/Az.Accounts/2.2.8.0"
-  }
-}
-
-resource "azurerm_automation_module" "az_resources" {
-  name                    = "Az.Resources"
-  resource_group_name     = data.azurerm_resource_group.main.name
-  automation_account_name = data.azurerm_automation_account.main.name
-
-  module_link {
-    uri = "https://www.powershellgallery.com/api/v2/package/Az.Resources/2.5.1.0"
-  }
-
-  depends_on = [
-    azurerm_automation_module.az_accounts
-  ]
-}
-
-resource "azurerm_automation_module" "az_policy_insights" {
-  name                    = "Az.PolicyInsights"
-  resource_group_name     = data.azurerm_resource_group.main.name
-  automation_account_name = data.azurerm_automation_account.main.name
-
-  module_link {
-    uri = "https://www.powershellgallery.com/api/v2/package/Az.PolicyInsights/1.3.1.0"
-  }
-
-  depends_on = [
-    azurerm_automation_module.az_resources
-  ]
-}
-```
-
-Note that if the depends on blocks are not included, Terraform will successfully import the first module, but fail on the rest.
+You will also need to be sure that you have the required automation modules to run the script in the automation account.  This includes Az.Accounts, Az.Resources, and Az.PolicyInsights.  A commented modules.tf file has been provided in case you don't have these in your automation account.  Note that if the depends on blocks are not included, Terraform will successfully import the first module, but fail on the rest.

@@ -1,3 +1,6 @@
+# These are the automation modules required by the runbook to run.
+# Only remove the comments for the ones you need and update the depends on blocks as required.
+
 # resource "azurerm_automation_module" "az_accounts" {
 #   name                    = "Az.Accounts"
 #   resource_group_name     = data.azurerm_resource_group.main.name
