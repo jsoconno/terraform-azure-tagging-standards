@@ -20,7 +20,7 @@ resource "azurerm_policy_assignment" "apa_tagging_standards" {
 }
 
 resource "azurerm_role_assignment" "apa_tagging_standards" {
-    scope                 = "/providers/Microsoft.Management/managementGroups/${data.azurerm_management_group.tenant_root.name}"
+    scope                 = data.azurerm_management_group.tenant_root.id
     role_definition_name  = "Contributor"
     principal_id          = azurerm_policy_assignment.apa_tagging_standards.identity[0].principal_id
 }

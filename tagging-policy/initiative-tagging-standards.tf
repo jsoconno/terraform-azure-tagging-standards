@@ -10,7 +10,7 @@ locals {
 resource "azurerm_policy_set_definition" "tagging_standards" {
     name                  = "api_tagging_standards"
     policy_type           = "Custom"
-    display_name          = "Example Tagging Standards"
+    display_name          = "Tagging Standards"
     management_group_name = data.azurerm_management_group.tenant_root.name
     description           = "Tagging Standards to be applied to the Azure environment."
 

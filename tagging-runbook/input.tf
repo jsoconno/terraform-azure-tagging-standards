@@ -22,6 +22,6 @@ variable "automation_account_name" {
     type = string
 }
 
-variable "automation_run_as_account" {
+variable "automation_run_as_account_name" {
     type = string
 }

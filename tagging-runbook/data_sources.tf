@@ -12,7 +12,7 @@ data "local_file" "tagging_remediation" {
 }
 
 data "azuread_service_principal" "automation_run_as_account" {
-  display_name = var.automation_run_as_account
+  display_name = var.automation_run_as_account_name
 }
 
 data "azurerm_management_group" "tenant_root" {

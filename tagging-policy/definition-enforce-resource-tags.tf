@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "enforce_resource_tags" {
     management_group_name = data.azurerm_management_group.tenant_root.name
     policy_type  = "Custom"
     mode         = "Indexed"
-    display_name = "Example Enforce Resource Tags"
+    display_name = "Enforce Resource Tags"
     description  = "Policy to enforce that a specific tag exists for a resource.  Excludes metric alerts."
 
     lifecycle {

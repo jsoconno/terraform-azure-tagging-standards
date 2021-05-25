@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "enforce_resource_group_tags" {
     management_group_name = data.azurerm_management_group.tenant_root.name
     policy_type  = "Custom"
     mode         = "All"
-    display_name = "Example Enforce Resource Group Tags"
+    display_name = "Enforce Resource Group Tags"
 
     lifecycle {
         ignore_changes = [

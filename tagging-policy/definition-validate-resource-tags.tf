@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "validate_resource_tags" {
     management_group_name = data.azurerm_management_group.tenant_root.name
     policy_type  = "Custom"
     mode         = "Indexed"
-    display_name = "Example Validate Resource Tags"
+    display_name = "Validate Resource Tags"
     description  = "Policy to validate the value supplied for a tag key based on a parameterized array for a resource."
 
     lifecycle {
